@@ -1,0 +1,56 @@
+@startuml TechSupportSystem
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Администратор" as Staff
+actor "Клиент" as User
+
+package "PulseFit" {
+    usecase "Вход в систему" as UC_Login_Staff
+    usecase "Добавить клиента" as UC_Add_Client
+    usecase "Просмотреть информацию о клиенте" as UC_View_Client
+    usecase "Удалить клиента" as UC_Delete_Client
+    usecase "Изменить информацию о абонементе" as UC_Edit_Subscription
+    usecase "Оформить абонемент" as UC_Create_Subscription
+    usecase "Просмотреть информацию о посещений" as UC_View_Visits
+    usecase "Проверить срок действия абонемента" as UC_Check_Sub
+  
+
+
+
+
+
+
+    usecase "Вход в систему" as UC_Login_Client
+    usecase "Просмотреть информацию о своём абонементе" as UC_View_My_Subscription
+    usecase "Узнать расписание занятий" as UC_View_Schedule
+    usecase "Проверить срок действия абонемента" as UC_Check_Subscription
+    usecase "Просмотреть свою статистику посещений" as UC_View_My_Visits
+  
+}
+
+Staff --> UC_Login_Staff
+
+UC_Login_Staff --> UC_Add_Client
+UC_Login_Staff --> UC_View_Client
+UC_Login_Staff --> UC_Delete_Client
+UC_Login_Staff --> UC_Edit_Subscription
+
+UC_Add_Client --> UC_Create_Subscription: <<include>>
+UC_View_Client --> UC_View_Visits: <<extend>>
+UC_Edit_Subscription--> UC_Check_Sub: <<extend>>
+
+
+
+
+
+
+User --> UC_Login_Client
+
+UC_Login_Client --> UC_View_My_Subscription
+UC_Login_Client --> UC_Check_Subscription
+
+UC_View_My_Subscription --> UC_View_Schedule: <<extend>>
+UC_View_My_Subscription --> UC_View_My_Visits: <<extend>>
+
+@enduml
